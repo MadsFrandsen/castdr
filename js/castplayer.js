@@ -62,7 +62,7 @@
     this.currentMediaDuration = -1;
     // @type {Timer} A timer for tracking progress of media
     this.timer = null;
-    // @type {Boolean} A boolean to stop timer update of progress when triggered by media status event 
+    // @type {Boolean} A boolean to stop timer update of progress when triggered by media status event
     this.progressFlag = true;
     // @type {Number} A number in milliseconds for minimal progress update
     this.timerStep = 1000;
@@ -245,7 +245,7 @@
    * Loads media into a running receiver application
    * @param {Number} mediaIndex An index number to indicate current media content
    */
-  CastPlayer.prototype.loadMedia = function(mediaUrl, contentType, title, imgUrl) {
+  CastPlayer.prototype.loadMedia = function(mediaUrl, contentType, title, imgUrl, startTime) {
     if (!this.session) {
       console.log("no session");
       return;
@@ -268,7 +268,7 @@
 
     var request = new chrome.cast.media.LoadRequest(mediaInfo);
     request.autoplay = this.autoplay;
-    request.currentTime = 0;
+    request.currentTime = startTime;
 
     this.castPlayerState = PLAYER_STATE.LOADING;
     this.session.loadMedia(

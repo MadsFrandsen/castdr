@@ -108,9 +108,9 @@ function startPlayback() {
   drUrlHandler.handleUrl(url);
 }
 
-function _startPlayback(mediaUrl, title, imgUrl) {
+function _startPlayback(mediaUrl, title, imgUrl, startTime) {
   var contentType = getContentType(mediaUrl);
-  player.loadMedia(mediaUrl, contentType, title, imgUrl);
+  player.loadMedia(mediaUrl, contentType, title, imgUrl, startTime);
   $('#player_img').attr("src", imgUrl)
   // $('#player_now_playing').html('Now playing ' + title);
   // $('#player_img').attr("src", imgUrl).show();

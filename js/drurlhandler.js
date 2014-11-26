@@ -1,7 +1,8 @@
 function DrUrlHandler() {
   this.mediaUrl = "";
   this.title = "";
-  this.imgUrl = ""
+  this.imgUrl = "";
+  this.startTime = 0;
 }
 
 DrUrlHandler.prototype.getInfo = function() {
@@ -61,6 +62,10 @@ DrUrlHandler.prototype.interpretDrProgramUrl = function(path) {
   if (!(encodeURIComponent(path[2]) == path[2] &&
     encodeURIComponent(path[3]) == path[3])) {
     throw "Bad characters in URL";
+  }
+
+  if(path[4] != null) {
+    this.startTime = parseTime(path[4])
   }
 
   var slugs = {
@@ -173,13 +178,13 @@ DrUrlHandler.prototype.selectVideoUrl = function(manifest) {
 }
 
 DrUrlHandler.prototype.success = function() {
-  this.onSuccess(this.mediaUrl, this.title, this.imgUrl);
+  this.onSuccess(this.mediaUrl, this.title, this.imgUrl, this.startTime);
 }
 
 /**
  * Callback for clients.
  */
-DrUrlHandler.prototype.onSuccess = function(mediaUrl, title, imgUrl) {
+DrUrlHandler.prototype.onSuccess = function(mediaUrl, title, imgUrl, startTime) {
   console.log("Successfully fetched DR URL:")
   console.log(this)
   console.log(mediaUrl)
@@ -212,4 +217,14 @@ function fetchJson(sURL, fCallback) {
   oReq.onerror = xhrError;
   oReq.open("get", sURL, true);
   oReq.send(null);
+}
+
+function parseTime(time) {
+  times = time.split(":");
+  startTime = times[times.length - 1]);
+  if(times.length > 1)
+    startTime += times[times.length - 2]);
+  if(times.length > 2)
+    startTime += times[times.length - 3]);
+  return parsedTime;
 }
