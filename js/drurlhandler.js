@@ -64,8 +64,8 @@ DrUrlHandler.prototype.interpretDrProgramUrl = function(path) {
     throw "Bad characters in URL";
   }
 
-  if(path[4] != null) {
-    this.startTime = parseTime(path[4])
+  if(path.length > 4) {
+    this.startTime = parseTime(path[6])
   }
 
   var slugs = {
@@ -220,11 +220,11 @@ function fetchJson(sURL, fCallback) {
 }
 
 function parseTime(time) {
-  times = time.split(":");
-  startTime = times[times.length - 1]);
+  times = time.split(':');
+  parsedTime = parseInt(times[times.length - 1]);
   if(times.length > 1)
-    startTime += times[times.length - 2]);
+      parsedTime += parseInt(times[times.length - 2]) * 60;
   if(times.length > 2)
-    startTime += times[times.length - 3]);
+      parsedTime += parseInt(times[times.length - 3]) * 3600;
   return parsedTime;
 }
