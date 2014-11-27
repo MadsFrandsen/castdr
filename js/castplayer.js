@@ -265,6 +265,7 @@
       image.height = 529;
       mediaInfo.metadata.images = [image];
     }
+    this.currentMediaTime = startTime;
 
     var request = new chrome.cast.media.LoadRequest(mediaInfo);
     request.autoplay = this.autoplay;
@@ -333,8 +334,6 @@
     $('#loading_img').hide();
     $('#controls').show();
 
-
-
     if (this.castPlayerState == PLAYER_STATE.PLAYING) {
       // start progress timer
       this.startProgressTimer(this.incrementMediaTime);
@@ -372,7 +371,6 @@
    */
   CastPlayer.prototype.onMediaStatusUpdate = function(e) {
     if (e == false) {
-      this.currentMediaTime = 0;
       this.castPlayerState = PLAYER_STATE.IDLE;
     }
     console.log("updating media");

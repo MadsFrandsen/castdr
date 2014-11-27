@@ -66,6 +66,8 @@ DrUrlHandler.prototype.interpretDrProgramUrl = function(path) {
 
   if(path.length > 4) {
     this.startTime = parseTime(path[6])
+  } else {
+    this.startTime = 0;
   }
 
   var slugs = {
